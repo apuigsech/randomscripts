@@ -99,7 +99,7 @@ def gh_sha1(message):
     return '%08x%08x%08x%08x%08x' % (h0, h1, h2, h3, h4)
 
 
-def sha1_round(block, s=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]):
+def sha1_round(block, s):
     block = block[:64]
     chunks = block_split(block, 4)
     w = [struct.unpack('>I', x)[0] for x in chunks] + [0]*64
@@ -130,8 +130,7 @@ def sha1_round(block, s=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]
     return o
 
 
-def sha1(m):
-    s=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]
+def sha1(m, s=[0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]):
     l = len(m)
     m += '\x80'
     m += '\x00' * ((56-(l+1)%64)%64)
