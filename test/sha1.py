@@ -3,6 +3,7 @@
 import math
 import hashlib
 import struct
+import cryptohelper
 
 def block_split(data, blocklen=16):
     return [data[i*blocklen:(i+1)*blocklen] for i in range(int(math.ceil(float(len(data))/blocklen)))]
@@ -153,4 +154,5 @@ MSG = "this is a test for sha-1 functions. I hope it works good. Damm, I need It
 
 print gh_sha1(MSG)
 print hashlib.sha1(MSG).hexdigest()
-print sha1(MSG).encode('hex)')
+print sha1(MSG).encode('hex')
+print cryptohelper.sha1(MSG).encode('hex')

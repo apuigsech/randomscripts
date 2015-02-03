@@ -4,6 +4,7 @@ import math
 import hashlib
 from binascii import hexlify
 import struct
+import cryptohelper
 
 def block_split(data, blocklen=16):
     return [data[i*blocklen:(i+1)*blocklen] for i in range(int(math.ceil(float(len(data))/blocklen)))]
@@ -283,19 +284,8 @@ def md4_round(block, s):
 
 
 MSG = "this is a test for sha-1 functions. I hope it works good. Damm, I need It larger than..."
-#MSG = MSG[:64]
-
-
-
 
 print gh_md4(MSG)
 print hashlib.new('md4', MSG).hexdigest()
 print md4(MSG).encode('hex')
-
-
-#m="ABCDEFGHIJKL"
-#print make_words([ord(c) for c in m])
-#print [struct.unpack("<I", block) for block in block_split(m,4)]
-
-
-
+print cryptohelper.md4(MSG).encode('hex')
