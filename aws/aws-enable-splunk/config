@@ -1,0 +1,7 @@
+[auth]
+region = us-west-2
+access-key = AKIAIIYV2J562C3YIDGA
+secret-key = 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
+
+[splunk]
+username = splunk2
