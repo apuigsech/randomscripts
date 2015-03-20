@@ -25,7 +25,7 @@
 import sys
 import argparse
 import configparser
-import boto.iam
+from boto import *
 
 
 def parse_options(argv):
@@ -49,24 +49,63 @@ def get_config(opt):
 	return conf		
 
 
-def main(argv):
-	conf = get_config(parse_options(argv))
-
+def conf_s3(conf):
 	try:
-		iam = boto.iam.connect_to_region(
+		aws = s3.connect_to_region(
 			conf.get('auth', 'region'),
 			aws_access_key_id=conf.get('auth', 'access-key'),
 			aws_secret_access_key=conf.get('auth', 'secret-key')
 		)
-	except Exception as e:
-		print e
-		exit(1)
 
-	try:
-		iam.create_user(conf.get('splunk', 'username'))
+		aws.create_bucket(conf.get('audit', 'bucket'), location=conf.get('auth', 'region'))
 	except Exception as e:
 		print e
-		exit(1)
+		exit(1)	
+
+
+def conf_iam(conf):
+	try:
+		aws = s3.connect_to_region(
+			conf.get('auth', 'region'),
+			aws_access_key_id=conf.get('auth', 'access-key'),
+			aws_secret_access_key=conf.get('auth', 'secret-key')
+		)
+
+		user_name = conf.get('audit', 'user')
+		group_name = conf.get('audit', 'group')
+
+		aws.create_user(user_name)
+		aws.create_user(group_name)
+		aws.add_user_to_group(group_name, user_name)
+	except Exception as e:
+		print e
+		exit(1)	
+	
+
+def conf_cloudtrail(conf):
+	try:
+		aws = cloudtrail.connect_to_region(
+			conf.get('auth', 'region'),
+			aws_access_key_id=conf.get('auth', 'access-key'),
+			aws_secret_access_key=conf.get('auth', 'secret-key')
+		)
+
+		aws.create_trail(name='audit', s3_bucket_name=conf.get('audit', 'bucket'))
+	except Exception as e:
+		print e
+		exit(1)	
+
+
+def main(argv):
+	conf = get_config(parse_options(argv))
+
+	print "s3"
+	conf_s3(conf)
+	print "ct"
+	conf_cloudtrail(conf)
+	print "iam"
+	conf_iam(conf)
+
 
 
 if __name__ == "__main__":
