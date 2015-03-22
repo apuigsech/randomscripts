@@ -1,0 +1,14 @@
+iam:
+
+  groups:
+    - name: audit
+
+  users:
+    - name: audit
+    - name: slunk
+
+  relations:
+    user-groups:
+      audit: audit, splunk
+
+
